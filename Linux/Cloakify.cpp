@@ -25,5 +25,5 @@ std::string Cloak(const std::string Input, bool File)
     else
         Input64 = Encoding::Base64::Encode(FileToString(Input));
 
-
+    return Input64;
 }
