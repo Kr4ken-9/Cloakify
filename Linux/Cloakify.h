@@ -7,5 +7,5 @@
 #include "base64.h"
 
 std::string Cloak(std::string Input, bool File = false);
-
+std::string Cloak(std::string Input, bool File);
 #endif
