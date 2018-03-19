@@ -1,19 +1,15 @@
 #include "Cloakify.h"
 
-const std::string base64_chars =
+const std::string _base64_chars =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 "abcdefghijklmnopqrstuvwxyz"
                 "0123456789+/";
 
 std::string FileToString(const std::string FileName)
 {
-    std::stringstream sstr;
-    std::ifstream in;
+    std::ifstream in (FileName.c_str());
 
-    in.open(FileName);
-    sstr << in.rdbuf();
-
-    return sstr.str();
+    return static_cast<std::stringstream const&>(std::stringstream() << in.rdbuf()).str();
 }
 
 std::string Cloak(const std::string Input, bool File)
@@ -25,5 +21,5 @@ std::string Cloak(const std::string Input, bool File)
     else
         Input64 = Encoding::Base64::Encode(Input);
 
-    return Input64;
+
 }

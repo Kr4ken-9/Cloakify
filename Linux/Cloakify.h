@@ -4,6 +4,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <vector>
 #include "base64.h"
 
 std::string Cloak(std::string Input, bool File = false);
