@@ -4,5 +4,6 @@
 
 int main()
 {
+    std::cout << FileToString("Makefile");
     return 0;
 }

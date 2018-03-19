@@ -7,9 +7,15 @@ const std::string _base64_chars =
 
 std::string FileToString(const std::string FileName)
 {
-    std::ifstream in (FileName.c_str());
+    std::ifstream ifs(FileName.c_str(), std::ios::in | std::ios::binary | std::ios::ate);
 
-    return static_cast<std::stringstream const&>(std::stringstream() << in.rdbuf()).str();
+    std::ifstream::pos_type fileSize = ifs.tellg();
+    ifs.seekg(0, std::ios::beg);
+
+    std::vector<char> bytes(fileSize);
+    ifs.read(bytes.data(), fileSize);
+
+    return std::string(bytes.data(), fileSize);
 }
 
 std::string Cloak(const std::string Input, bool File)
