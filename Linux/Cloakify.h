@@ -5,8 +5,17 @@
 #include <sstream>
 #include <fstream>
 #include <vector>
+#include <iterator>
 #include "base64.h"
 
-std::string Cloak(std::string Input, bool File = false);
-std::string Cloak(std::string Input, bool File);
+enum FILES
+{
+    NONE,
+    INPUT,
+    CIPHER,
+    BOTH
+};
+
+std::string Cloak(const std::string Input, const std::string Cipher, const FILES Files);
+
 #endif
