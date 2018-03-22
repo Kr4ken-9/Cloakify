@@ -3,7 +3,7 @@
 const std::string _base64_chars =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         "abcdefghijklmnopqrstuvwxyz"
-        "0123456789+/";
+        "0123456789+/=";
 
 template<typename Out>
 void split(const std::string &s, char delim, Out result) {
@@ -33,18 +33,6 @@ std::string FileToString(const std::string FileName)
     return std::string(bytes.data(), fileSize);
 }
 
-std::string FileToLines(const std::string FileName)
-{
-    std::ifstream File(FileName);
-    std::string Line;
-    std::string Output;
-
-    while (std::getline(File, Line))
-        Output += Line + "\n";
-
-    return Output;
-}
-
 std::string Cloak(const std::string Input, std::string Cipher, const FILES Files)
 {
     std::string Input64;
@@ -55,7 +43,7 @@ std::string Cloak(const std::string Input, std::string Cipher, const FILES Files
         Input64 = Encoding::Base64::Encode(Input);
 
     if(Files == FILES::BOTH || Files == FILES::CIPHER)
-        Cipher = FileToLines(Cipher);
+        Cipher = FileToString(Cipher);
 
     std::vector<std::string> Ciphers = split(Cipher, '\n');
     std::string Output;
@@ -64,7 +52,14 @@ std::string Cloak(const std::string Input, std::string Cipher, const FILES Files
     {
         const char B64 = Input64[i];
 
-        Output += Ciphers[_base64_chars.find(B64)];
+        if(B64 == '=' && i != Input64.length() - 1)
+            if(Input64[i + 1] == '=')
+            {
+                Output += Ciphers[_base64_chars.find(B64) + 1] + "\n";
+                return Output;
+            }
+
+        Output += Ciphers[_base64_chars.find(B64)] + "\n";
     }
 
     return Output;
