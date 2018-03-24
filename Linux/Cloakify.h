@@ -6,6 +6,7 @@
 #include <fstream>
 #include <vector>
 #include <iterator>
+#include <algorithm>
 #include "base64.h"
 
 enum FILES

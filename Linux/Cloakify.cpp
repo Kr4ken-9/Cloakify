@@ -33,6 +33,35 @@ std::string FileToString(const std::string FileName)
     return std::string(bytes.data(), fileSize);
 }
 
+std::string Uncloak(const std::string Input, std::string Cipher, const FILES Files)
+{
+    std::vector<std::string> InputCiphered;
+    std::vector<std::string> Ciphers;
+
+    if(Files == FILES::BOTH || Files == FILES::INPUT)
+    {
+        InputCiphered = split(FileToString(Input), '\n');
+        Ciphers = split(FileToString(Cipher), '\n');
+    }
+    else
+    {
+        InputCiphered = split(Input, '\n');
+        Ciphers = split(Cipher, '\n');
+    }
+
+    std::string Output64;
+
+    for(int i = 0; i < InputCiphered.size(); i++)
+    {
+        std::string CString = InputCiphered[i];
+        std::ptrdiff_t pos = std::distance(Ciphers.begin(), std::find(Ciphers.begin(), Ciphers.end(), CString));
+
+        Output64 += _base64_chars[pos];
+    }
+
+    return Encoding::Base64::Decode(Output64);
+}
+
 std::string Cloak(const std::string Input, std::string Cipher, const FILES Files)
 {
     std::string Input64;

@@ -3,6 +3,9 @@
 
 int main()
 {
-    std::cout << Cloak("Noodles", "topWebsites", FILES::BOTH);
+    std::string Cloaked = Cloak("Noodles", "topWebsites", FILES::BOTH);
+    std::string Uncloaked = Uncloak("Noodles", "topWebsites", FILES::BOTH);
+    std::cout << Cloaked << std::endl;
+    std::cout << Uncloaked << std::endl;
     return 0;
 }
