@@ -4,7 +4,7 @@
 int main()
 {
     std::string Cloaked = Cloak("Noodles", "topWebsites", FILES::BOTH);
-    std::string Uncloaked = Uncloak("Noodles", "topWebsites", FILES::BOTH);
+    std::string Uncloaked = Uncloak(Cloaked, "topWebsites", FILES::CIPHER);
     std::cout << Cloaked << std::endl;
     std::cout << Uncloaked << std::endl;
     return 0;
