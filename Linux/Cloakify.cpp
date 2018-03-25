@@ -38,12 +38,6 @@ std::string Uncloak(const std::string Input, std::string Cipher, const FILES Fil
     std::vector<std::string> InputCiphered;
     std::vector<std::string> Ciphers;
 
-    /*std::string ICF = Input;
-    InputCiphered = split(ICF, '\n');
-
-    std::string CF = FileToString(Cipher);
-    Ciphers = split(CF, '\n');*/
-
     if(Files == FILES::BOTH || Files == FILES::CIPHER)
         Ciphers = split(FileToString(Cipher), '\n');
     else
