@@ -3,4 +3,4 @@ project(Cloakify)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_library(Cloakify SHARED Cloakify.cpp Cloakify.h base64.h base64.cpp)
+add_library(Cloakify SHARED Cloakify.cpp Cloakify.h base64.h base64.cpp Entropy.cpp Entropy.h)
