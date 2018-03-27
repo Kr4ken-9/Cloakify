@@ -22,11 +22,15 @@ std::string AddEntropy(const std::string Input, const std::string Entropy, const
     {
         std::string ILine = ILines[i];
 
-        if(Noise == NOISE::PREPEND)
+        if(Noise == NOISE::PREPEND || Noise == NOISE::SUFFIX)
         {
-            std::string Noise = ELines[rand() % ELines.size()];
+            std::string ONoise = ELines[rand() % ELines.size()];
 
-            ILines[i] = Noise + " " + ILine;
+            if(Noise == NOISE::PREPEND)
+                ILines[i] = ONoise + " " + ILine;
+
+            if(Noise == NOISE::SUFFIX)
+                ILines[i] = ILine + " " + ONoise;
         }
 
         Output += ILines[i] + "\n";

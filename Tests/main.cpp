@@ -11,6 +11,6 @@ int main()
     std::cout << Cloaked << std::endl;
     std::cout << Uncloaked << std::endl;*/
 
-    std::cout << AddEntropy("Noodles", "Entropy", FILES::BOTH, NOISE::PREPEND);
+    std::cout << AddEntropy("Noodles", "Entropy", FILES::BOTH, NOISE::SUFFIX);
     return 0;
 }
