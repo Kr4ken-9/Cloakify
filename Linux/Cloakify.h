@@ -2,9 +2,6 @@
 #define CLOAKIFY_LIBRARY_H
 
 #include <iostream>
-#include <sstream>
-#include <fstream>
-#include <vector>
 #include <iterator>
 #include <algorithm>
 #include "base64.h"

@@ -1,13 +1,13 @@
 #ifndef CLOAKIFY_ENTROPY_H
 #define CLOAKIFY_ENTROPY_H
 
-#include <fstream>
+#include <ctime>
 
 enum FILES
 {
     NONE,
     INPUT,
-    NOISE,
+    ENTROPY,
     BOTH
 };
 
