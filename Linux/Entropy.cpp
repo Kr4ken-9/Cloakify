@@ -1,6 +1,8 @@
 #include "Entropy.h"
 #include "Shared.h"
 
+const std::string Symbols  = "`~!@#$%^&*()-_=+[{]}\\|';/?.>,<";
+
 std::string AddEntropy(const std::string Input, const std::string Entropy, const FILES Files, const NOISE Noise)
 {
     std::string UsableInput = Input;
@@ -27,13 +29,21 @@ std::string AddEntropy(const std::string Input, const std::string Entropy, const
             std::string ONoise = ELines[rand() % ELines.size()];
 
             if(Noise == NOISE::PREPEND)
-                ILines[i] = ONoise + " " + ILine;
+                Output += ONoise + " " + ILine;
 
             if(Noise == NOISE::SUFFIX)
-                ILines[i] = ILine + " " + ONoise;
+                Output += ILine + " " + ONoise;
         }
 
-        Output += ILines[i] + "\n";
+        if(Noise == NOISE::SYMBOL)
+        {
+            for(int o = 0; o < ILine.length(); o++)
+            {
+                Output += std::string(1, Symbols[rand() % Symbols.length()]) + ILine[o];
+            }
+        }
+
+        Output += std::string(1, Symbols[rand() % Symbols.length()]) + "\n";
     }
 
     return Output;

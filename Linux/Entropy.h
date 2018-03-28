@@ -14,7 +14,7 @@ enum FILES
 enum NOISE
 {
     ALPHANUMERIC,
-    SPECIAL,
+    SYMBOL,
     PREPEND,
     SUFFIX
 };
