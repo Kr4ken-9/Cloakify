@@ -38,12 +38,17 @@ std::string AddEntropy(const std::string Input, const std::string Entropy, const
         if(Noise == NOISE::SYMBOL)
         {
             for(int o = 0; o < ILine.length(); o++)
-            {
                 Output += std::string(1, Symbols[rand() % Symbols.length()]) + ILine[o];
-            }
+
+            Output += std::string(1, Symbols[rand() % Symbols.length()]);
         }
 
-        Output += std::string(1, Symbols[rand() % Symbols.length()]) + "\n";
+        if(Noise == NOISE::ALPHANUMERIC)
+        {
+
+        }
+
+        Output += "\n";
     }
 
     return Output;
