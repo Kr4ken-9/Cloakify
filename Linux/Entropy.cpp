@@ -2,6 +2,9 @@
 #include "Shared.h"
 
 const std::string Symbols  = "`~!@#$%^&*()-_=+[{]}\\|';/?.>,<";
+const std::string Numerals = "0123456789";
+const std::string Alphabeticals = "abcedfghijklmnopqrstuvwxyz"
+                                  "ABCEDFGHIJKLMNOPQRSTUVWXYZ";
 
 std::string AddEntropy(const std::string Input, const std::string Entropy, const FILES Files, const NOISE Noise)
 {
@@ -45,7 +48,18 @@ std::string AddEntropy(const std::string Input, const std::string Entropy, const
 
         if(Noise == NOISE::ALPHANUMERIC)
         {
+            for(int o = 0; o < ILine.length(); o++)
+            {
+                if(isdigit(ILine[0]))
+                    Output += std::string(1, Alphabeticals[rand() % Alphabeticals.length()]) + ILine[o];
+                else
+                    Output += std::string(1, Numerals[rand() % Numerals.length()]) + ILine[o];
+            }
 
+            if(isdigit(ILine[0]))
+                Output += std::string(1, Alphabeticals[rand() % Alphabeticals.length()]);
+            else
+                Output += std::string(1, Numerals[rand() % Numerals.length()]);
         }
 
         Output += "\n";
