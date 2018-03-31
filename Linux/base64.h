@@ -19,10 +19,10 @@ namespace Encoding {
     public:
         static std::string Encode(std::string data, bool toUrlSafe = false, size_t lineBreaks = NO_LINE_BREAKS);
         static std::string Decode(std::string encoded_string);
-        static std::string InsertLineBreaks(std::string base64, size_t lineBreakAppear = LINE_BREAKS_APPEAR_MIME);
-        static std::string RemoveLineBreaks(std::string base64);
-        static std::string ToSafeUrlBase64(std::string base64);
-        static std::string ToUnsafeUrlBase64(std::string base64);
+        static void InsertLineBreaks(std::string &base64, size_t lineBreakAppear = LINE_BREAKS_APPEAR_MIME);
+        static void RemoveLineBreaks(std::string &base64);
+        static void ToSafeUrlBase64(std::string &base64);
+        static void ToUnsafeUrlBase64(std::string &base64);
     private:
     };
 }

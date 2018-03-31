@@ -41,30 +41,30 @@ static inline bool is_base64(unsigned char c) {
     return (isalnum(c) || (c == '+') || (c == '/'));
 }
 
-std::string ReplaceAll(std::string str, std::string from, std::string to) {
+void ReplaceAll(std::string &str, const std::string &from, const std::string &to) {
     size_t pos = 0;
     while ((pos = str.find(from, pos)) != std::string::npos) {
         str.replace(pos, from.length(), to);
         pos += to.length();
     }
-    return str;
 }
 
-std::string RemoveAll(std::string str, std::string toErase) {
+void RemoveAll(std::string &str, const std::string &toErase) {
     if (toErase.length() < 1 || str.length() < 1) {
-        return str;
+        return;
     }
+
     size_t pos = 0;
     while ((pos = str.find(toErase, pos)) != std::string::npos) {
         str.erase(pos, toErase.length());
     }
-    return str;
 }
 
-std::string InsertRepeat(std::string str, size_t repeatEvery, std::string toRepeat, bool includeEnd) {
-    if (repeatEvery < 1 || toRepeat == "" || toRepeat == "\0" || str.length() < 1 || toRepeat.length() < 1) {
-        return str;
+void InsertRepeat(std::string &str, size_t repeatEvery, const std::string &toRepeat, bool includeEnd) {
+    if (repeatEvery < 1 || toRepeat.empty() || toRepeat == "\0" || str.length() < 1 || toRepeat.length() < 1) {
+        return;
     }
+
     size_t pos = repeatEvery;
     while (pos < str.size()) {
         str.insert(pos, toRepeat);
@@ -73,29 +73,26 @@ std::string InsertRepeat(std::string str, size_t repeatEvery, std::string toRepe
     if (pos == str.length() && includeEnd) {
         str += toRepeat;
     }
-    return str;
 }
 
-std::string Encoding::Base64::ToSafeUrlBase64(std::string base64) {
-    base64 = ReplaceAll(base64, "+", "-");
-    base64 = ReplaceAll(base64, "/", "_");
-    base64 = ReplaceAll(base64, "=", ",");
-    return base64;
+void Encoding::Base64::ToSafeUrlBase64(std::string &base64) {
+    ReplaceAll(base64, "+", "-");
+    ReplaceAll(base64, "/", "_");
+    ReplaceAll(base64, "=", ",");
 }
 
-std::string Encoding::Base64::ToUnsafeUrlBase64(std::string base64) {
-    base64 = ReplaceAll(base64, "-", "+");
-    base64 = ReplaceAll(base64, "_", "/");
-    base64 = ReplaceAll(base64, ",", "=");
-    return base64;
+void Encoding::Base64::ToUnsafeUrlBase64(std::string &base64) {
+    ReplaceAll(base64, "-", "+");
+    ReplaceAll(base64, "_", "/");
+    ReplaceAll(base64, ",", "=");
 }
 
-std::string Encoding::Base64::RemoveLineBreaks(std::string base64) {
-    return RemoveAll(base64, LINE_BREAKS_CHAR);
+void Encoding::Base64::RemoveLineBreaks(std::string &base64) {
+    RemoveAll(base64, LINE_BREAKS_CHAR);
 }
 
-std::string Encoding::Base64::InsertLineBreaks(std::string base64, size_t lineBreakAppear) {
-    return InsertRepeat(base64, lineBreakAppear, LINE_BREAKS_CHAR, false);
+void Encoding::Base64::InsertLineBreaks(std::string &base64, size_t lineBreakAppear) {
+    InsertRepeat(base64, lineBreakAppear, LINE_BREAKS_CHAR, false);
 }
 
 std::string Encoding::Base64::Encode(std::string data, bool toUrlSafe, size_t lineBreaks ) {
@@ -142,15 +139,18 @@ std::string Encoding::Base64::Encode(std::string data, bool toUrlSafe, size_t li
     }
     if(lineBreaks>0)
     {
-        ret = InsertLineBreaks(ret, lineBreaks);
+        InsertLineBreaks(ret, lineBreaks);
     }
-    ret = toUrlSafe ? ToSafeUrlBase64(ret) : ret;
+
+    if(toUrlSafe)
+        ToSafeUrlBase64(ret);
+
     return ret;
 }
 
 std::string Encoding::Base64::Decode(std::string base64) {
-    base64 = ToUnsafeUrlBase64(base64);
-    base64 = RemoveLineBreaks(base64);
+    ToUnsafeUrlBase64(base64);
+    RemoveLineBreaks(base64);
     int in_len = base64.size();
     int i = 0;
     int j = 0;

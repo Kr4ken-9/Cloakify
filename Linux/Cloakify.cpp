@@ -23,9 +23,8 @@ std::string Uncloak(const std::string Input, std::string Cipher, const FILES Fil
 
     std::string Output64;
 
-    for(int i = 0; i < InputCiphered.size(); i++)
+    for (std::string CString : InputCiphered)
     {
-        std::string CString = InputCiphered[i];
         std::ptrdiff_t pos = std::distance(Ciphers.begin(), std::find(Ciphers.begin(), Ciphers.end(), CString));
 
         Output64 += _base64_chars[pos];
