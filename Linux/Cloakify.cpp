@@ -6,7 +6,7 @@ const std::string _base64_chars =
         "abcdefghijklmnopqrstuvwxyz"
         "0123456789+/=";
 
-std::string Uncloak(const std::string Input, std::string Cipher, const FILES Files)
+std::string Uncloak(const std::string &Input, const std::string &Cipher, const FILES Files)
 {
     std::vector<std::string> InputCiphered;
     std::vector<std::string> Ciphers;
@@ -23,7 +23,7 @@ std::string Uncloak(const std::string Input, std::string Cipher, const FILES Fil
 
     std::string Output64;
 
-    for (std::string CString : InputCiphered)
+    for (const std::string &CString : InputCiphered)
     {
         std::ptrdiff_t pos = std::distance(Ciphers.begin(), std::find(Ciphers.begin(), Ciphers.end(), CString));
 

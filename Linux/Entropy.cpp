@@ -6,7 +6,7 @@ const std::string Numerals = "0123456789";
 const std::string Alphabeticals = "abcedfghijklmnopqrstuvwxyz"
                                   "ABCEDFGHIJKLMNOPQRSTUVWXYZ";
 
-std::string AddEntropy(const std::string Input, const std::string Entropy, const FILES Files, const NOISE Noise)
+std::string AddEntropy(const std::string &Input, const std::string &Entropy, const FILES Files, const NOISE Noise)
 {
     std::string UsableInput = Input;
 
@@ -23,19 +23,17 @@ std::string AddEntropy(const std::string Input, const std::string Entropy, const
     std::string Output;
 
     srand((int)time(0));
-    for(int i = 0; i < ILines.size(); i++)
+    for (const std::string &ILine : ILines)
     {
-        std::string ILine = ILines[i];
-
         if(Noise == NOISE::PREPEND || Noise == NOISE::SUFFIX)
         {
             std::string ONoise = ELines[rand() % ELines.size()];
 
             if(Noise == NOISE::PREPEND)
-                Output += ONoise + " " + ILine;
+                Output += ONoise.append(" ").append(ILine);
 
             if(Noise == NOISE::SUFFIX)
-                Output += ILine + " " + ONoise;
+                Output += ILine + std::string(" ").append(ONoise);
         }
 
         if(Noise == NOISE::SYMBOL)
