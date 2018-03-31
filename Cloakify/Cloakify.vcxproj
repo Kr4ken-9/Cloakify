@@ -115,7 +115,7 @@
     <ClCompile Include="..\src\Cloakify.cpp" />
     <ClCompile Include="..\src\Entropy.cpp" />
     <ClCompile Include="..\src\Shared.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\Tests\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\base64.h" />
