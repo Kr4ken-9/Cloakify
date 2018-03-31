@@ -4,8 +4,8 @@
 #include <ctime>
 #include <stdio.h>
 #include <stdlib.h>
-
-
+#include <string>
+#include "Shared.h"
 enum FILES
 {
     NONE,
@@ -21,5 +21,7 @@ enum NOISE
     PREPEND,
     SUFFIX
 };
+
+std::string AddEntropy(const std::string &Input, const std::string &Entropy, const FILES Files, const NOISE Noise);
 
 #endif //CLOAKIFY_ENTROPY_H

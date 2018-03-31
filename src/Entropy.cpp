@@ -1,5 +1,5 @@
 #include "Entropy.h"
-#include "Shared.h"
+
 
 const std::string Symbols  = "`~!@#$%^&*()-_=+[{]}\\|';/?.>,<";
 const std::string Numerals = "0123456789";

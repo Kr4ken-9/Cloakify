@@ -1,5 +1,4 @@
 #include "Cloakify.h"
-#include "Shared.h"
 
 const std::string _base64_chars =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

@@ -1,16 +1,17 @@
-#include "../Linux/base64.cpp"
-//#include "../Linux/Cloakify.cpp"
-#include "../Linux/Shared.cpp"
-#include "../Linux/Entropy.cpp"
+#include "../src/base64.h"
+#include "../src/Cloakify.h"
+#include "../src/Shared.h"
+//#include "../src/Entropy.h"
 #include <iostream>
 
 int main()
 {
-    /*std::string Cloaked = Cloak("Noodles", "topWebsites", FILES::BOTH);
-    std::string Uncloaked = Uncloak(Cloaked, "topWebsites", FILES::CIPHER);
-    std::cout << Cloaked << std::endl;
-    std::cout << Uncloaked << std::endl;*/
+	std::string Cloaked = Cloak("Noodles", "topWebsites",   FILES::BOTH);
+	std::string Uncloaked = Uncloak(Cloaked, "topWebsites", FILES::CIPHER);
+	std::cout << Cloaked << std::endl;
+	std::cout << Uncloaked << std::endl;
 
-    std::cout << AddEntropy("Noodles", "Entropy", FILES::BOTH, NOISE::SYMBOL);
-    return 0;
+	//std::cout << AddEntropy("Noodles", "Entropy", FILES::NONE, NOISE::SYMBOL);
+	std::cin.get();
+	return 0;
 }
