@@ -1,5 +1,7 @@
 #include "Shared.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wsign-conversion"
 std::string FileToString(const std::string FileName)
 {
     std::ifstream ifs(FileName.c_str(), std::ios::in | std::ios::binary | std::ios::ate);
@@ -12,6 +14,7 @@ std::string FileToString(const std::string FileName)
 
     return std::string(bytes.data(), fileSize);
 }
+#pragma clang diagnostic pop
 
 template<typename Out>
 void split(const std::string &s, char delim, Out result) {

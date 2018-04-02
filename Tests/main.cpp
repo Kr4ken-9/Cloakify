@@ -11,8 +11,8 @@ int main()
 	std::cout << Cloaked << std::endl;
 	std::cout << Uncloaked << std::endl;*/
 
-	std::string Entropy = AddEntropy("Noodles", "Entropy", FILES::BOTH, NOISE::SUFFIX);
-	std::string DeEntropy = RemoveEntropy(Entropy, FILES::NONE, NOISE::SUFFIX);
+	std::string Entropy = AddEntropy("Noodles", "Entropy", FILES::BOTH, NOISE::ALPHANUMERIC);
+	std::string DeEntropy = RemoveEntropy(Entropy, FILES::NONE, NOISE::ALPHANUMERIC);
 
 	std::cout << Entropy << std::endl << DeEntropy << std::endl;
 	//std::cin.get();

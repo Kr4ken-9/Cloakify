@@ -29,6 +29,18 @@ std::string RemoveEntropy(const std::string &Input, const FILES Files, const NOI
                 Output += Parts[0];
         }
 
+        if(Noise == NOISE::ALPHANUMERIC)
+        {
+            for(int i = 0; i < Line.size(); i++)
+            {
+                if(i == 0)
+                    continue;
+
+                Output += Line[i];
+                i++;
+            }
+        }
+
         Output += "\n";
     }
 
