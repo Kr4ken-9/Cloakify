@@ -29,7 +29,7 @@ std::string RemoveEntropy(const std::string &Input, const FILES Files, const NOI
                 Output += Parts[0];
         }
 
-        if(Noise == NOISE::ALPHANUMERIC)
+        if(Noise == NOISE::ALPHANUMERIC || Noise == NOISE::SYMBOL)
         {
             for(int i = 0; i < Line.size(); i++)
             {
