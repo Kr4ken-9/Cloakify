@@ -15,6 +15,6 @@ enum FILES
     BOTH
 };
 
-std::string Cloak(const std::string Input, const std::string Cipher, const FILES Files);
-std::string Uncloak(const std::string &Input, const std::string &Cipher, const FILES Files);
+std::string Cloak(const std::string &Input, const std::string &Cipher, FILES Files);
+std::string Uncloak(const std::string &Input, const std::string &Cipher, FILES Files);
 #endif
