@@ -20,7 +20,8 @@ enum NOISE
     ALPHANUMERIC,
     SYMBOL,
     PREPEND,
-    SUFFIX
+    SUFFIX,
+    FAF
 };
 
 std::string AddEntropy(const std::string &Input, const std::string &Entropy, FILES Files, NOISE Noise);

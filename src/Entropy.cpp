@@ -67,6 +67,32 @@ std::string AddEntropy(const std::string &Input, const std::string &Entropy, con
 #pragma clang diagnostic ignored "-Wsign-conversion"
     srand((int)time(0));
 #pragma clang diagnostic pop
+
+    if(Noise == NOISE::FAF)
+    {
+        std::vector<std::string> RandFreq;
+
+        for(int i = 0; i < 5; i++)
+            RandFreq.push_back(ELines[rand() % ELines.size()]);
+
+        for(int o = 0; o < ILines.size(); o++)
+        {
+            std::string ILine = ILines[o];
+            std::string ELine = RandFreq[rand() % RandFreq.size()];
+            bool Prefix = true;
+
+            if((o + 1) % 3 == 0)
+                Prefix = !Prefix;
+
+            if(Prefix)
+                Output += ELine.append(" ").append(ILine);
+            else
+                Output += ILine + std::string(" ").append(ELine);
+
+            Output += "\n";
+        }
+    }
+
     for (const std::string &ILine : ILines)
     {
         if(Noise == NOISE::PREPEND || Noise == NOISE::SUFFIX)
