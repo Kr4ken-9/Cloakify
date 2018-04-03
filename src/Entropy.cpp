@@ -16,6 +16,28 @@ std::string RemoveEntropy(const std::string &Input, const FILES Files, const NOI
     std::vector<std::string> Lines = split(UsableInput, '\n');
     std::string Output;
 
+    if(Noise == NOISE::AFAF)
+    {
+        for (int i = 0; i < Lines.size(); i++)
+        {
+            std::vector <std::string> Parts = split(Lines[i], ' ');
+
+            bool Prefix = true;
+
+            if ((i + 1) % 3 == 0)
+                Prefix = !Prefix;
+
+            if (Prefix)
+                Output += Parts[1];
+            else
+                Output += Parts[0];
+
+            Output += "\n";
+        }
+
+        return Output;
+    }
+
     for(const std::string &Line : Lines)
     {
         if(Noise == NOISE::PREPEND || Noise == NOISE::SUFFIX)
@@ -68,9 +90,9 @@ std::string AddEntropy(const std::string &Input, const std::string &Entropy, con
     srand((int)time(0));
 #pragma clang diagnostic pop
 
-    if(Noise == NOISE::FAF)
+    if(Noise == NOISE::AFAF)
     {
-        std::vector<std::string> RandFreq;
+        std::vector<std::string> RandFreq = nullptr;
 
         for(int i = 0; i < 5; i++)
             RandFreq.push_back(ELines[rand() % ELines.size()]);
@@ -91,6 +113,8 @@ std::string AddEntropy(const std::string &Input, const std::string &Entropy, con
 
             Output += "\n";
         }
+
+        return Output;
     }
 
     for (const std::string &ILine : ILines)

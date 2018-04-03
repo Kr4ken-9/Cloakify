@@ -11,10 +11,10 @@ int main()
 	std::cout << Cloaked << std::endl;
 	std::cout << Uncloaked << std::endl;*/
 
-	std::string Entropy = AddEntropy("Noodles", "topWebsites", FILES::BOTH, NOISE::FAF);
-	//std::string DeEntropy = RemoveEntropy(Entropy, FILES::NONE, NOISE::ALPHANUMERIC);
+	std::string Entropy = AddEntropy("Noodles", "topWebsites", FILES::BOTH, NOISE::AFAF);
+	std::string DeEntropy = RemoveEntropy(Entropy, FILES::NONE, NOISE::AFAF);
 
-	std::cout << Entropy /*<< std::endl << DeEntropy << std::endl*/;
+	std::cout << Entropy << std::endl << DeEntropy << std::endl;
 	//std::cin.get();
 	return 0;
 }
