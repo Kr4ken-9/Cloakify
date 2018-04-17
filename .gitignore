@@ -100,3 +100,8 @@ CTestTestfile.cmake
 #CLion
 cmake-build-debug
 .idea
+/CSharp/Cloakify.sln
+/CSharp/.vs/config
+/CSharp/.vs/Cloakify/v15
+/CSharp/Cloakify/bin/Debug/netstandard2.0
+/CSharp/Cloakify/obj
