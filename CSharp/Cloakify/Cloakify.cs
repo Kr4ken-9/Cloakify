@@ -6,9 +6,9 @@ namespace Cloakify
 {
     public static class Cloakify
     {
-        public enum InputMode { BothFiles, InputFile, CipherFile }
+        public enum InputMode { BothFiles, InputFile, CipherFile, None }
 
-        private const string base64Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+        private const string BASE64CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
         public static string Cloak(string input, string cipher, InputMode inputMode)
         {
@@ -29,11 +29,11 @@ namespace Cloakify
                 if (c == '=' && i != input64.Length - 1)
                     if (input64[i + 1] == '=')
                     {
-                        result.Append(cipherArray[base64Characters.IndexOf(c) + 1] + '\n');
+                        result.Append(cipherArray[BASE64CHARACTERS.IndexOf(c) + 1] + '\n');
                         return result.ToString();
                     }
 
-                result.Append(cipherArray[base64Characters.IndexOf(c)] + '\n');
+                result.Append(cipherArray[BASE64CHARACTERS.IndexOf(c)] + '\n');
             }
 
             return result.ToString();
@@ -54,7 +54,14 @@ namespace Cloakify
             foreach (string s in inputLines)
             {
                 int index = Array.FindIndex(cipherLines, x => x == s);
-                result.Append(base64Characters[index]);
+
+                if (index == 65)
+                {
+                    result.Append("==");
+                    break;
+                }
+                else
+                    result.Append(BASE64CHARACTERS[index]);
             }
 
             return DecodeBase64(result.ToString());
