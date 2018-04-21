@@ -26,13 +26,19 @@ std::string Uncloak(const std::string &Input, const std::string &Cipher, const F
     {
         std::ptrdiff_t pos = std::distance(Ciphers.begin(), std::find(Ciphers.begin(), Ciphers.end(), CString));
 
+        if(pos == 65)
+        {
+            Output64 += "==";
+            return Encoding::Base64::Decode(Output64);
+        }
+
         Output64 += _base64_chars[pos];
     }
 
     return Encoding::Base64::Decode(Output64);
 }
 
-std::string Cloak(const std::string Input, std::string Cipher, const FILES Files)
+std::string Cloak(const std::string &Input, std::string Cipher, const FILES Files)
 {
     std::string Input64;
 
