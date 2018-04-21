@@ -6,14 +6,14 @@ const std::string Numerals = "0123456789";
 const std::string Alphabeticals = "abcedfghijklmnopqrstuvwxyz"
                                   "ABCEDFGHIJKLMNOPQRSTUVWXYZ";
 
-std::string RemoveEntropy(const std::string &Input, const FILES Files, const NOISE Noise)
+std::string RemoveEntropy(const std::string &Input, const FILES Files, const NOISE Noise, const char &Separator)
 {
     std::string UsableInput = Input;
 
     if(Files == FILES::BOTH || Files == FILES::INPUT)
         UsableInput = FileToString(UsableInput);
 
-    std::vector<std::string> Lines = split(UsableInput, '\n');
+    std::vector<std::string> Lines = split(UsableInput, Separator);
     std::string Output;
 
     if(Noise == NOISE::AFAF)
@@ -32,7 +32,7 @@ std::string RemoveEntropy(const std::string &Input, const FILES Files, const NOI
             else
                 Output += Parts[0];
 
-            Output += "\n";
+            Output += Separator;
         }
 
         return Output;
@@ -63,13 +63,13 @@ std::string RemoveEntropy(const std::string &Input, const FILES Files, const NOI
             }
         }
 
-        Output += "\n";
+        Output += Separator;
     }
 
     return Output;
 }
 
-std::string AddEntropy(const std::string &Input, const std::string &Entropy, const FILES Files, const NOISE Noise)
+std::string AddEntropy(const std::string &Input, const std::string &Entropy, const FILES Files, const NOISE Noise, const char &Separator)
 {
     std::string UsableInput = Input;
 
@@ -81,7 +81,7 @@ std::string AddEntropy(const std::string &Input, const std::string &Entropy, con
     if(Files == FILES::BOTH || Files == FILES::ENTROPY)
         UsableEntropy = FileToString(UsableEntropy);
 
-    std::vector<std::string> ILines = split(UsableInput, '\n');
+    std::vector<std::string> ILines = split(UsableInput, Separator);
     std::vector<std::string> ELines = split(UsableEntropy, '\n');
     std::string Output;
 
@@ -111,7 +111,7 @@ std::string AddEntropy(const std::string &Input, const std::string &Entropy, con
             else
                 Output += ILine + std::string(" ").append(ELine);
 
-            Output += "\n";
+            Output += Separator;
         }
 
         return Output;
@@ -154,7 +154,7 @@ std::string AddEntropy(const std::string &Input, const std::string &Entropy, con
                 Output += std::string(1, Numerals[rand() % Numerals.length()]);
         }
 
-        Output += "\n";
+        Output += Separator;
     }
 
     return Output;

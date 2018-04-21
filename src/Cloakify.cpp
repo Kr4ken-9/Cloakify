@@ -5,7 +5,7 @@ const std::string _base64_chars =
         "abcdefghijklmnopqrstuvwxyz"
         "0123456789+/=";
 
-std::string Uncloak(const std::string &Input, const std::string &Cipher, const FILES Files)
+std::string Uncloak(const std::string &Input, const std::string &Cipher, const FILES Files, const char &Separator)
 {
     std::vector<std::string> InputCiphered;
     std::vector<std::string> Ciphers;
@@ -16,9 +16,9 @@ std::string Uncloak(const std::string &Input, const std::string &Cipher, const F
         Ciphers = split(Cipher, '\n');
 
     if(Files == FILES::BOTH || Files == FILES::INPUT)
-        InputCiphered = split(FileToString(Input), '\n');
+        InputCiphered = split(FileToString(Input), Separator);
     else
-        InputCiphered = split(Input, '\n');
+        InputCiphered = split(Input, Separator);
 
     std::string Output64;
 
@@ -38,7 +38,7 @@ std::string Uncloak(const std::string &Input, const std::string &Cipher, const F
     return Encoding::Base64::Decode(Output64);
 }
 
-std::string Cloak(const std::string &Input, std::string Cipher, const FILES Files)
+std::string Cloak(const std::string &Input, std::string Cipher, const FILES Files, const char &Separator)
 {
     std::string Input64;
 
@@ -60,11 +60,11 @@ std::string Cloak(const std::string &Input, std::string Cipher, const FILES File
         if(B64 == '=' && i != Input64.length() - 1)
             if(Input64[i + 1] == '=')
             {
-                Output += Ciphers[_base64_chars.find(B64) + 1] + "\n";
+                Output += Ciphers[_base64_chars.find(B64) + 1] + Separator;
                 return Output;
             }
 
-        Output += Ciphers[_base64_chars.find(B64)] + "\n";
+        Output += Ciphers[_base64_chars.find(B64)] + Separator;
     }
 
     return Output;
