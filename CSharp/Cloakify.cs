@@ -10,7 +10,7 @@ namespace Cloakify
 
         private const string BASE64CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
-        public static string Cloak(string input, string cipher, InputMode inputMode)
+        public static string Cloak(string input, string cipher, InputMode inputMode, char cipherSeperator, char seperator)
         {
             if (inputMode == InputMode.BothFiles || inputMode == InputMode.CipherFile)
                 cipher = File.ReadAllText(cipher);
@@ -18,7 +18,7 @@ namespace Cloakify
                 input = File.ReadAllText(input);
 
             string input64 = EncodeBase64(input);
-            string[] cipherArray = cipher.Split('\n');
+            string[] cipherArray = cipher.Split(cipherSeperator);
 
             StringBuilder result = new StringBuilder();
 
@@ -29,25 +29,25 @@ namespace Cloakify
                 if (c == '=' && i != input64.Length - 1)
                     if (input64[i + 1] == '=')
                     {
-                        result.Append(cipherArray[BASE64CHARACTERS.IndexOf(c) + 1] + '\n');
+                        result.Append(cipherArray[BASE64CHARACTERS.IndexOf(c) + 1] + seperator);
                         return result.ToString();
                     }
 
-                result.Append(cipherArray[BASE64CHARACTERS.IndexOf(c)] + '\n');
+                result.Append(cipherArray[BASE64CHARACTERS.IndexOf(c)] + seperator);
             }
 
             return result.ToString();
         }
 
-        public static string Uncloak(string input, string cipher, InputMode inputMode)
+        public static string Uncloak(string input, string cipher, InputMode inputMode, char cipherSeperator, char inputSeperator)
         {
             if (inputMode == InputMode.BothFiles || inputMode == InputMode.CipherFile)
                 cipher = File.ReadAllText(cipher);
             if (inputMode == InputMode.BothFiles || inputMode == InputMode.InputFile)
                 input = File.ReadAllText(input);
 
-            string[] inputLines = input.Trim('\n').Split('\n');
-            string[] cipherLines = cipher.Trim('\n').Split('\n');
+            string[] inputLines = input.Trim('\n').Split(inputSeperator);
+            string[] cipherLines = cipher.Trim(cipherSeperator).Split(cipherSeperator);
 
             StringBuilder result = new StringBuilder();
 
@@ -62,6 +62,7 @@ namespace Cloakify
                 }
                 else
                     result.Append(BASE64CHARACTERS[index]);
+
             }
 
             return DecodeBase64(result.ToString());

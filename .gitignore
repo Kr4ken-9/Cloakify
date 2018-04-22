@@ -105,3 +105,6 @@ cmake-build-debug
 /CSharp/.vs/Cloakify/v15
 /CSharp/Cloakify/bin/Debug/netstandard2.0
 /CSharp/Cloakify/obj
+/CSharp/obj/Debug/netstandard2.0
+/CSharp/bin/Debug/netstandard2.0
+/CSharp/obj
